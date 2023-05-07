@@ -42,7 +42,8 @@ heatmap = lime_heatmap(model, preprocessed_image)
 # Overlay the heatmap on the original image
 original_image_resized = cv2.resize(original_image, input_shape[::-1])  # Resize the image
 original_image_rgb = cv2.cvtColor(original_image_resized, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
-overlayed_image = mark_boundaries(original_image_rgb, heatmap)
+overlayed_image = mark_boundaries(original_image_rgb, heatmap).astype(np.float32)
+overlayed_image = (overlayed_image * 255).astype(np.uint8)
 
 # Add text to the image
 text_scale = 0.5  # Adjust the text size
@@ -50,9 +51,9 @@ text = f"Plant Status: {label}"
 cv2.putText(overlayed_image, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, text_scale, (0, 255, 0), 2)
 
 # Save the output image
-cv2.imwrite('image_with_lime_heatmap.jpg', cv2.cvtColor(overlayed_image, cv2.COLOR_RGB2BGR))
+cv2.imwrite('image_with_lime_heatmap.jpg', overlayed_image)
 
 # Display the output image
-cv2.imshow('LIME', cv2.cvtColor(overlayed_image, cv2.COLOR_RGB2BGR))
+cv2.imshow('LIME', overlayed_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
