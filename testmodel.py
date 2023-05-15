@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
 # Load the saved model
-model = load_model('sick_vs_healthy_model.h5')
+model = load_model('best_model.h5')
 img_width, img_height = 150, 150
 
 # Evaluate the model on the test dataset
