@@ -71,7 +71,7 @@ history = model.fit(
 )
 
 # Save the model
-model.save('sick_vs_healthy_model.h5')
+model.save('best_model.h5')
 
 # Evaluate the model on the test dataset (optional)
 test_datagen = ImageDataGenerator(rescale=1./255)
